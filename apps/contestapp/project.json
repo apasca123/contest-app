@@ -21,7 +21,8 @@
             "input": "apps/contestapp/public"
           }
         ],
-        "styles": ["apps/contestapp/src/styles.css"],
+        "styles": ["apps/contestapp/src/styles.css", "node_modules/bootstrap/dist/css/bootstrap.min.css",
+          "apps/contestapp/src/styles.css"],
         "scripts": [],
         "server": "apps/contestapp/src/main.server.ts",
         "ssr": {
@@ -62,6 +63,9 @@
         "development": {
           "buildTarget": "contestapp:build:development"
         }
+      },
+      "options": {
+        "proxyConfig": "apps/contestapp/proxy.config.json"
       },
       "defaultConfiguration": "development"
     },
