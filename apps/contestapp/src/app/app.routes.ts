@@ -9,6 +9,12 @@ export const appRoutes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'contest/:id', component: ContestDetailsComponent },
+  {
+    path: 'contest/:id',
+    component: ContestDetailsComponent,
+    data: {
+      renderMode: 'default'  // 👈 Asta dezactivează prerenderingul pentru această rută
+    }
+  },
   { path: 'admin', component: AdminPanelComponent },
 ];

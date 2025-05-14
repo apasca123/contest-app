@@ -7,12 +7,12 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:application",
+      "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/contestapp",
         "index": "apps/contestapp/src/index.html",
-        "browser": "apps/contestapp/src/main.ts",
+        "main": "apps/contestapp/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/contestapp/tsconfig.app.json",
         "assets": [
@@ -21,14 +21,11 @@
             "input": "apps/contestapp/public"
           }
         ],
-        "styles": ["apps/contestapp/src/styles.css", "node_modules/bootstrap/dist/css/bootstrap.min.css",
-          "apps/contestapp/src/styles.css"],
-        "scripts": [],
-        "server": "apps/contestapp/src/main.server.ts",
-        "ssr": {
-          "entry": "apps/contestapp/src/server.ts"
-        },
-        "outputMode": "server"
+        "styles": [
+          "apps/contestapp/src/styles.css",
+          "node_modules/bootstrap/dist/css/bootstrap.min.css"
+        ],
+        "scripts": []
       },
       "configurations": {
         "production": {
@@ -90,7 +87,7 @@
       "options": {
         "buildTarget": "contestapp:build",
         "port": 4200,
-        "staticFilePath": "dist/apps/contestapp/browser",
+        "staticFilePath": "dist/apps/contestapp",
         "spa": true
       }
     }

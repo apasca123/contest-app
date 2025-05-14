@@ -2,12 +2,13 @@
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
+import { EmailService } from '../mail-service/email.service';
 
 @Injectable()
 export class ContestService {
   private dataDir = path.join(__dirname, '..', 'data');
 
-  constructor() {
+  constructor(private readonly emailService: EmailService) {
     if (!fs.existsSync(this.dataDir)) {
       fs.mkdirSync(this.dataDir);
     }
@@ -106,8 +107,8 @@ export class ContestService {
     const newWinning = { id: winnings.length + 1, contestId, userId: winner.userId, date: new Date() };
     winnings.push(newWinning);
     fs.writeFileSync(winningsFile, JSON.stringify(winnings, null, 2), 'utf8');
-    const user = await this.getUserById(winner.userId);
-    this.sendEmail(user.email, 'Felicitări!', `Ai câștigat la contestul ${contestId}`);
+    const user = await this.getUserById(winner.userId) ;
+    await this.emailService.sendEmail('Informare castigator!', `Userul ${user.email} a câștigat la contestul ${contestId}`);
     return { message: 'Câștigător extras', winning: newWinning };
   }
 
